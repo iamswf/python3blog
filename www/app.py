@@ -9,7 +9,7 @@ import time
 from datetime import datetime
 from aiohttp import web
 from jinja2 import Environment, FileSystemLoader
-from middlewares import logger_factory, response_factory
+from middlewares import logger_factory, auth_factory, response_factory
 from web_frame import add_routes, add_static
 
 
@@ -64,7 +64,7 @@ async def init(loop):
         password='iamswf',
         db='pure_blog')
     app = web.Application(loop=loop, middlewares=[
-        logger_factory, response_factory
+        logger_factory, auth_factory, response_factory
     ])
     init_jinja2(app, filters=dict(datetime=datetime_filter))
     add_routes(app, 'handlers')

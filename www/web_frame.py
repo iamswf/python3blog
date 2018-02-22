@@ -144,7 +144,7 @@ class RequestHandler():
             # remove unnamed kwargs
             tmp = dict()
             for name in self._named_kw_args:
-                if name in kw:
+                if kw is not None and name in kw:
                     tmp[name] = kw[name]
             kw = tmp
         if kw is None:

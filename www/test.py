@@ -1,14 +1,12 @@
-import orm
-import asyncio
-from models import User, Blog, Comment
+def createcounter():
+    s = 0
+    def counter():
+        nonlocal s
+        s += 1
+        return s
+    return counter
 
-loop = asyncio.get_event_loop()
-
-async def test():
-    await orm.create_pool(loop=loop, user='iamswf', password='iamswf', db='pure_blog')
-
-    u = User(name='孙文飞', email='iamswf@163.com', passwd='sjdajf8', image='about:blank')
-
-    await u.save()
-
-loop.run_until_complete(test())
+c1 = createCounter()
+print(c1(), c1())
+c2 = createCounter()
+print(c2(), c2())
